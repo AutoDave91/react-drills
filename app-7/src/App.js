@@ -2,40 +2,35 @@ import React, { Component } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import Todo from '/Users/David_Wayne/devmtn/afternoon-projects/react-drills/app-6/src/components/Todo';
+import NewTask from './components/NewTask'
+import List from './components/List'
 
 class App extends Component {
   constructor(){
     super()
     this.state = {
       list: [],
-      input: ''
     }
     this.updateTodo = this.updateTodo.bind(this);
-}
+  }
 
-updateInputText(x){
-  this.setState({input: x})
-}
-updateTodo(){
-  this.setState({list: [...this.state.list, this.state.input],
-  input:''})
-} 
+  updateTodo(){
+    this.setState({list: [...this.state.list],
+    task})
+  } 
   
-render() {
-  let list= this.state.list.map((e, i)=> {
-    return <Todo key ={i} task ={e} />
-  });
-  return (
-    <main className="App">
-      <div className="adding">
+  render() {
+    let list= this.state.list.map((e, i)=> {
+      return <Todo key ={i} task ={e} />
+    });
+    return (
+      <main className="App">
         <h1>Your to-do list:</h1>
-        <input value={this.state.input} placeholder='Enter new task' onChange={(e)=> this.updateInputText(e.target.value)} />
-        <button onClick={this.updateTodo}>Add</button>
-      </div>
-      {list}
-    </main>
-  );
-}
+        <NewTask add={this.updateTodo} />
+        <List tasks={this.state.list} />
+      </main>
+    );
+  }
 }
 
 export default App;
